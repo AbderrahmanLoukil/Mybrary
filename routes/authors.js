@@ -6,17 +6,16 @@ const Author = require('../models/author')
 router.get('/',async(req,res)=>{
     let searchOptions = {}
     if (req.query.name!= null && req.query.name !==''){
-        searchOptions.name = new RegExp(req.query.name, 'i')
+        searchOptions.name = new RegExp(req.query.name, 'i') //fills the search (mo gives us mohsen moemen modeen ..)
     }
     try{
         const authors = await Author.find(searchOptions)
         res.render('authors/index', { 
             authors : authors ,
-            searchOptions : req.query
+            searchOptions : req.query //sends back the name to the user in the search bar
         })
     } catch {
         res.redirect('/')
-        
     }
 })
 
